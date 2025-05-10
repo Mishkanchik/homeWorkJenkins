@@ -84,39 +84,22 @@ builder.Services
 
 // CORS
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Читання змінних середовища
-builder.Configuration
-    .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-    .AddEnvironmentVariables();
-
-// Отримуємо origin
 string? allowedOrigins = builder.Configuration["Cors:AllowedOrigins"];
 if (string.IsNullOrEmpty(allowedOrigins))
 {
-    allowedOrigins = "http://localhost";
+    allowedOrigins = "http://35.202.171.198";
 }
-
-Console.WriteLine($"✅ CORS ALLOWED ORIGINS: {allowedOrigins}");
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("DefaultCors", policy =>
+    options.AddPolicy("DefaultCors", builder =>
     {
-        policy.WithOrigins(allowedOrigins.Split(','))
-              .AllowAnyMethod()
-              .AllowAnyHeader()
-              .AllowCredentials();
+        builder.WithOrigins(allowedOrigins)
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials();
     });
 });
-
-builder.Services.AddControllers();
-var app = builder.Build();
-
-// Додаємо CORS в pipeline
-app.UseCors("DefaultCors");
 
 // JWT bearer authorization
 builder.Services.AddEndpointsApiExplorer();

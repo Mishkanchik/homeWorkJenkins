@@ -85,10 +85,7 @@ builder.Services
 // CORS
 
 string? allowedOrigins = builder.Configuration["Cors:AllowedOrigins"];
-if (string.IsNullOrEmpty(allowedOrigins))
-{
-    allowedOrigins = "http://35.202.171.198";
-}
+
 
 builder.Services.AddCors(options =>
 {

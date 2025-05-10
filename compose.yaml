@@ -18,8 +18,7 @@ services:
       - api_nt
 
   api:
-    build: pd311_web_api/
-    image: potapchuk22/pd311_api
+    image: mishkanchikk/back
     container_name: "api"
     ports:
       - "7223:8080"
@@ -40,7 +39,7 @@ services:
       args: 
         REACT_APP_API_URL: http://35.202.171.198:7223/api/
         REACT_APP_IMAGES_URL: http://35.202.171.198:7223/images/
-    image: potapchuk22/pd311_react
+    image: mishkanchikk/front
     container_name: "front"
     ports:
       - "80:3000"

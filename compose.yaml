@@ -7,7 +7,7 @@ services:
       - "7223:8080"
     environment:
       - ConnectionStrings__NpgsqlLocal=User ID=postgres;Password=qwerty;Host=db;Port=5432;Database=pd311_web_api;
-      - Cors__AllowedOrigins=http://34.122.172.34
+      - Cors__AllowedOrigins=http://34.68.48.94
     depends_on:
       db:
         condition: service_healthy
@@ -20,8 +20,8 @@ services:
     build:
       context: dashboard/
       args:
-        REACT_APP_API_URL: http://34.122.172.34:7223/api/
-        REACT_APP_IMAGES_URL: http://34.122.172.34:7223/images/
+        REACT_APP_API_URL: http://34.68.48.94:7223/api/
+        REACT_APP_IMAGES_URL: http://34.68.48.94:7223/images/
     image: mishkanchikk/front
     container_name: "front"
     ports:

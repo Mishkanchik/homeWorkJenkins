@@ -9,7 +9,7 @@ services:
       - ConnectionStrings__NpgsqlLocal=User ID=postgres;Password=qwerty;Host=db;Port=5432;Database=pd311_web_api;
       - Cors__AllowedOrigins=http://34.68.48.94
     volumes:
-       - api_files:/app/wwwroot
+      - api_files:/app/wwwroot
     networks:
       - api_nt
 
@@ -32,6 +32,3 @@ networks:
 volumes:
   api_files:
     name: "pd311_api"
-  db_pd311:
-    driver: local
-    name: "pd311_db"

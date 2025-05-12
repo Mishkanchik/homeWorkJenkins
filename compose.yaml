@@ -1,4 +1,22 @@
 services:
+  db:
+    image: postgres
+    container_name: "db"
+    ports:
+      - "5432:5432"
+    environment:
+      - "POSTGRES_PASSWORD=Olapap50"
+      - "POSTGRES_DB=mishkanchik"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    volumes:
+      - db_pd311:/var/lib/postgresql/data
+    networks:
+      - api_nt
+
   api:
     build: pd311_web_api/
     image: mishkanchikk/back
@@ -6,10 +24,12 @@ services:
     ports:
       - "7223:8080"
     environment:
-      - ConnectionStrings__NpgsqlLocal=Server=tcp:mishkanchik-server.database.windows.net,1433;Initial Catalog=mishkanchik;Persist Security Info=False;User ID=mihskanchik;Password=Olapap50;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
       - Cors__AllowedOrigins=http://34.68.48.94
+    depends_on:
+      db:
+        condition: service_healthy
     volumes:
-      - api_files:/app/wwwroot
+       - api_files:/app/wwwroot
     networks:
       - api_nt
 
@@ -32,3 +52,6 @@ networks:
 volumes:
   api_files:
     name: "pd311_api"
+  db_pd311:
+    driver: local
+    name: "pd311_db"

@@ -141,7 +141,7 @@ app.UseMiddleware<MiddlewareLogger>();
 
 app.UseHttpsRedirection();
 
-app.UseCors("localhost");
+app.UseCors("DefaultCors");
 
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())

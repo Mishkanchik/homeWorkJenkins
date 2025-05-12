@@ -6,7 +6,7 @@ services:
     ports:
       - "7223:8080"
     environment:
-      - ConnectionStrings__NpgsqlLocal=User ID=postgres;Password=qwerty;Host=db;Port=5432;Database=pd311_web_api;
+      - ConnectionStrings__NpgsqlLocal=Server=tcp:mishkanchik-server.database.windows.net,1433;Initial Catalog=mishkanchik;Persist Security Info=False;User ID=mihskanchik;Password=Olapap50;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
       - Cors__AllowedOrigins=http://34.68.48.94
     volumes:
       - api_files:/app/wwwroot
